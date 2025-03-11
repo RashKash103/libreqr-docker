@@ -1,0 +1,3 @@
+[submodule "libreqr"]
+	path = libreqr
+	url = https://code.antopie.org/miraty/libreqr.git
