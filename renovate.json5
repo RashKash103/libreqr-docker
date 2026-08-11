@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  // Automerge everything. `major` is set explicitly because several presets
+  // opt majors out of automerge even when it is enabled at the top level.
+  "automerge": true,
+  "major": {
+    "automerge": true
+  },
+  "automergeType": "pr",
+  // Renovate does the merging itself rather than handing off to GitHub's native
+  // auto-merge, so it waits for every check on the branch to pass. GitHub only
+  // waits for checks marked *required* by branch protection, which would let a
+  // PR merge before build-test.yml finishes. Flip to true once main has branch
+  // protection requiring the "build" check.
+  "platformAutomerge": false,
+  // Track the libreqr submodule (Renovate's git-submodules manager is off by
+  // default). Replaces the Dependabot gitsubmodule updater.
+  "git-submodules": {
+    "enabled": true
+  }
+}
