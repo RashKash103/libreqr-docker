@@ -1,3 +1,11 @@
+FROM composer:2.2.29 AS builder
+
+# Copy the source to the builder container
+COPY /libreqr /app
+
+# Install the dependencies
+RUN composer install --no-dev --optimize-autoloader
+
 FROM php:8.3-apache
 
 # Install the PHP extensions we need
@@ -7,8 +15,8 @@ RUN install-php-extensions gd mbstring iconv
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Copy the source to the container
-COPY /libreqr /var/www/html
+# Copy the Apache configuration file to the container
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Make the /css directory writable by the web server
-RUN chown -R www-data:www-data /var/www/html/css
+# Copy the source from the builder container to the production container
+COPY --from=builder /app /var/www/html
