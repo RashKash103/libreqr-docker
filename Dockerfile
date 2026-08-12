@@ -6,7 +6,7 @@ COPY /libreqr /app
 # Install the dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-FROM php:8.3-apache
+FROM php:8.5-apache
 
 # Install the PHP extensions we need
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
