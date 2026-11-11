@@ -1,4 +1,4 @@
-FROM composer:2.11.1 AS builder
+FROM composer:2.11.2 AS builder
 
 # Copy the source to the builder container
 COPY /libreqr /app
